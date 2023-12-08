@@ -51,7 +51,7 @@ namespace PRA_B4_FOTOKIOSK.magie
             }
         }
 
-        public KioskProduct GetSelectedProduct()
+        public static KioskProduct GetSelectedProduct()
         {
             if (Instance.cbProducts.SelectedItem == null) return null;
             string selected = Instance.cbProducts.SelectedItem.ToString();
@@ -62,7 +62,7 @@ namespace PRA_B4_FOTOKIOSK.magie
             return null;
         }
 
-        public int? GetFotoId()
+        public static int? GetFotoId()
         {
             int? id = null;
             int amount = -1;
@@ -73,7 +73,7 @@ namespace PRA_B4_FOTOKIOSK.magie
             return id;
         }
 
-        public int? GetAmount()
+        public static int? GetAmount()
         {
             int? id = null;
             int amount = -1;
