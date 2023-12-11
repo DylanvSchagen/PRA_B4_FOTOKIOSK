@@ -34,18 +34,24 @@ namespace PRA_B4_FOTOKIOSK.controller
         // Wordt uitgevoerd wanneer er op de Toevoegen knop is geklikt
         public void AddButtonClick()
         {
-            ShopManager.AddShopReceipt(ShopManager.GetFotoId() + "");   
+            KioskProduct selectedProduct = ShopManager.GetSelectedProduct();
+            int? fotoId = ShopManager.GetFotoId(); 
+            int? amount = ShopManager.GetAmount();
+
+            string receipt = $"{selectedProduct} - {amount} fotoId: {fotoId}"; 
+            ShopManager.AddShopReceipt(receipt);
         }
 
         // Wordt uitgevoerd wanneer er op de Resetten knop is geklikt
         public void ResetButtonClick()
         {
-
+            ShopManager.SetShopReceipt("Eindbedrag\n€");
         }
 
         // Wordt uitgevoerd wanneer er op de Save knop is geklikt
         public void SaveButtonClick()
         {
+            string receipt = ShopManager.GetShopReceipt();
         }
 
     }
