@@ -47,9 +47,10 @@ namespace PRA_B4_FOTOKIOSK.controller
     public void AddButtonClick()
         {
             KioskProduct selectedProduct = ShopManager.GetSelectedProduct();
+
             int? fotoId = ShopManager.GetFotoId(); 
             int? amount = ShopManager.GetAmount();
-            int? price = ShopManager.GetShopPriceList();
+            float price = selectedProduct.Price;
 
             string receipt = $"{price * amount}"; 
             ShopManager.AddShopReceipt(receipt);
