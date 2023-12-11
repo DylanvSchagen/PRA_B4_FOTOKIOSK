@@ -26,13 +26,25 @@ namespace PRA_B4_FOTOKIOSK.controller
 
             // Vul de productlijst met producten
             ShopManager.Products.Add(new KioskProduct() { Name = "Foto 10x15" });
-            
+
             // Update dropdown met producten
             ShopManager.UpdateDropDownProducts();
+
+            foreach (KioskProduct product in ShopManager.Products)
+            {
+                // Voeg de naam van het huidige product toe aan de prijslijst
+                ShopManager.SetShopPriceList(product.Price.ToString());
+                ShopManager.AddShopPriceList(product.Price.ToString());
+
+            }
         }
 
-        // Wordt uitgevoerd wanneer er op de Toevoegen knop is geklikt
-        public void AddButtonClick()
+
+
+
+
+    // Wordt uitgevoerd wanneer er op de Toevoegen knop is geklikt
+    public void AddButtonClick()
         {
             KioskProduct selectedProduct = ShopManager.GetSelectedProduct();
             int? fotoId = ShopManager.GetFotoId(); 
