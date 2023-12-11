@@ -35,7 +35,7 @@ namespace PRA_B4_FOTOKIOSK.controller
                  * dir string is de map waar de fotos in staan. Bijvoorbeeld:
                  * \fotos\0_Zondag
                  */
-                MessageBox.Show(dir);
+                //MessageBox.Show(dir);
                 if (dir.Substring(15, 1) == day.ToString())
                 {
                     foreach (string file in Directory.GetFiles(dir))
