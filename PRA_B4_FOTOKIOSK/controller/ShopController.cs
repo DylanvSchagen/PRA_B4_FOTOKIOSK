@@ -37,8 +37,9 @@ namespace PRA_B4_FOTOKIOSK.controller
             KioskProduct selectedProduct = ShopManager.GetSelectedProduct();
             int? fotoId = ShopManager.GetFotoId(); 
             int? amount = ShopManager.GetAmount();
+            int? price = ShopManager.GetShopPriceList();
 
-            string receipt = $"{selectedProduct} - {amount} fotoId: {fotoId}"; 
+            string receipt = $"{price * amount}"; 
             ShopManager.AddShopReceipt(receipt);
         }
 
@@ -52,6 +53,8 @@ namespace PRA_B4_FOTOKIOSK.controller
         public void SaveButtonClick()
         {
             string receipt = ShopManager.GetShopReceipt();
+            string filePath = "downloads\\receipt.txt";
+            File.WriteAllText(filePath, receipt);
         }
 
     }
