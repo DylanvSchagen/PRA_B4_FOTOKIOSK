@@ -42,10 +42,19 @@ namespace PRA_B4_FOTOKIOSK.controller
                     {
                         /**
                          * file string is de file van de foto. Bijvoorbeeld:
-                         * \fotos\0_Zondag\10_05_30_id8824.jpg
+                         * \fotos\0_Zondag\10_05_30_id8824.jpg      
                          */
-                        PicturesToDisplay.Add(new KioskPhoto() { Id = 0, Source = file });
+                        DateTime twomin = now.AddMinutes(-2);
+                        DateTime thirtymin = now.AddMinutes(-30);
 
+                        int twostring = int.Parse(twomin.ToString().Remove(0,11).Replace(@":", ""));
+                        int thirtystring = int.Parse(thirtymin.ToString().Remove(0, 11).Replace(@":", ""));
+                        int filestring = int.Parse(file.Substring(25, 8).Replace(@"_", ""));
+
+                        if (filestring <= twostring && filestring >= thirtystring)
+                        {
+                            PicturesToDisplay.Add(new KioskPhoto() { Id = 0, Source = file });
+                        }
                     }
                 }
             }
