@@ -67,7 +67,7 @@ namespace PRA_B4_FOTOKIOSK.controller
         public void SaveButtonClick()
         {
             string receipt = ShopManager.GetShopReceipt();
-            string filePath = "downloads\\receipt.txt";
+            string filePath = "C:\\laragon\\www\\PRA_B4_FOTOKIOSK\\PRA_B4_FOTOKIOSKreceipt.txt";
             File.WriteAllText(filePath, receipt);
         }
 
