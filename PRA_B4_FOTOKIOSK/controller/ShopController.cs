@@ -15,6 +15,12 @@ namespace PRA_B4_FOTOKIOSK.controller
         public static Home Window { get; set; }
 
         public List<KioskProduct> Products { get; set; }
+        public List<OrderProduct> OrderedProducts { get; set; }
+        public ShopController()
+        {
+            // Initialize OrderedProducts
+            OrderedProducts = new List<OrderProduct>();
+        }
 
         public void Start()
         {
@@ -38,38 +44,57 @@ namespace PRA_B4_FOTOKIOSK.controller
                 ShopManager.AddShopPriceList(product.Price.ToString());
 
             }
+
+            foreach (OrderProduct product in OrderedProducts)
+            {
+                ShopManager.AddShopPriceList(product.FotoId.ToString());
+                ShopManager.AddShopPriceList(product.ProductName.ToString());
+                ShopManager.AddShopPriceList(product.Amount.ToString());
+                ShopManager.AddShopPriceList(product.PriceTotal.ToString());
+
+
+            }
+
         }
-
-
-
-
-
-    // Wordt uitgevoerd wanneer er op de Toevoegen knop is geklikt
-    public void AddButtonClick()
+        // Wordt uitgevoerd wanneer er op de Toevoegen knop is geklikt
+        public void AddButtonClick()
         {
             KioskProduct selectedProduct = ShopManager.GetSelectedProduct();
-
-            int? fotoId = ShopManager.GetFotoId(); 
+            string productName = selectedProduct.Name;
+            int? fotoId = ShopManager.GetFotoId();
             int? amount = ShopManager.GetAmount();
             float price = selectedProduct.Price;
 
-            string receipt = $"{price * amount}"; 
+            // Create a new OrderProduct instance
+            OrderProduct newOrderProduct = new OrderProduct
+            {
+                FotoId = fotoId,
+                ProductName = productName,
+                Amount = amount,
+                PriceTotal = amount * price
+            };
+
+            OrderedProducts.Add(newOrderProduct);
+            // Update the receipt
+            string receipt = $"{price * amount}\n FotoId: {fotoId}\n Product naam: {productName}\n Aantal: {amount} ";
             ShopManager.AddShopReceipt(receipt);
         }
 
+
         // Wordt uitgevoerd wanneer er op de Resetten knop is geklikt
         public void ResetButtonClick()
-        {
-            ShopManager.SetShopReceipt("Eindbedrag\n€");
-        }
+            {
+                ShopManager.SetShopReceipt("Eindbedrag\n€");
+            }
 
-        // Wordt uitgevoerd wanneer er op de Save knop is geklikt
-        public void SaveButtonClick()
-        {
-            string receipt = ShopManager.GetShopReceipt();
-            string filePath = "C:\\laragon\\www\\PRA_B4_FOTOKIOSK\\PRA_B4_FOTOKIOSKreceipt.txt";
-            File.WriteAllText(filePath, receipt);
-        }
+            // Wordt uitgevoerd wanneer er op de Save knop is geklikt
+            public void SaveButtonClick()
+            {
+                string receipt = ShopManager.GetShopReceipt();
+                string orderedReceipt = ShopManager.GetShopReceipt();
+                string filePath = "C:\\laragon\\www\\PRA_B4_FOTOKIOSK\\PRA_B4_FOTOKIOSKreceipt.txt";
+                File.WriteAllText(filePath, receipt);
+            }
 
     }
 }
