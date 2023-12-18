@@ -19,42 +19,28 @@ namespace PRA_B4_FOTOKIOSK.controller
         public void Start()
         {
             // Stel de prijslijst in aan de rechter kant.
-            ShopManager.SetShopPriceList("Prijzen:\nFoto 10x15: \nFoto 20x15");
+            ShopManager.SetShopPriceList("Prijzen:\nFoto 10x15: €2.55");
 
             // Stel de bon in onderaan het scherm
             ShopManager.SetShopReceipt("Eindbedrag\n€");
 
             // Vul de productlijst met producten
-            ShopManager.Products.Add(new KioskProduct() { Name = "Foto 10x15", Price = 2.55F, Description = "Foto" });
-            ShopManager.Products.Add(new KioskProduct() { Name = "Foto 20x15", Price = 2.80F, Description = "Foto" });
-
-
+            ShopManager.Products.Add(new KioskProduct() { Name = "Foto 10x15" });
+            
             // Update dropdown met producten
             ShopManager.UpdateDropDownProducts();
-
-            foreach (KioskProduct product in ShopManager.Products)
-            {
-                // Voeg de naam van het huidige product toe aan de prijslijst
-                ShopManager.AddShopPriceList(product.Price.ToString());
-
-            }
         }
 
-
-
-
-
-    // Wordt uitgevoerd wanneer er op de Toevoegen knop is geklikt
-    public void AddButtonClick()
+        // Wordt uitgevoerd wanneer er op de Toevoegen knop is geklikt
+       public void AddButtonClick()
         {
             KioskProduct selectedProduct = ShopManager.GetSelectedProduct();
-
             int? fotoId = ShopManager.GetFotoId(); 
             int? amount = ShopManager.GetAmount();
-            float price = selectedProduct.Price;
+            //int? price = ShopManager.GetShopPriceList();
 
-            string receipt = $"{price * amount}"; 
-            ShopManager.AddShopReceipt(receipt);
+           string receipt = $"{amount}"; 
+           ShopManager.AddShopReceipt(receipt);
         }
 
         // Wordt uitgevoerd wanneer er op de Resetten knop is geklikt
@@ -67,7 +53,7 @@ namespace PRA_B4_FOTOKIOSK.controller
         public void SaveButtonClick()
         {
             string receipt = ShopManager.GetShopReceipt();
-            string filePath = "C:\\laragon\\www\\PRA_B4_FOTOKIOSK\\PRA_B4_FOTOKIOSKreceipt.txt";
+            string filePath = "downloads\\receipt.txt";
             File.WriteAllText(filePath, receipt);
         }
 
