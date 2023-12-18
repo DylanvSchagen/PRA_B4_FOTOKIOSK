@@ -1,2 +1,5 @@
 Eindbedrag
-€5.6
+€591,6
+ FotoId: 2222
+ Product naam: Foto 10x15
+ Aantal: 232 
