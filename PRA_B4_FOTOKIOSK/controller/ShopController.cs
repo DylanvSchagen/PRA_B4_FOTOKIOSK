@@ -81,7 +81,7 @@ namespace PRA_B4_FOTOKIOSK.controller
             ShopManager.SetShopReceipt("Eindbedrag\n€");
         }
 
-        // Wordt uitgevoerd wanneer er op de Save knop is geklikt
+        // Wordt uitgevoerd wanneer er op de Save knop is geklik
         public void SaveButtonClick()
         {
             string receipt = ShopManager.GetShopReceipt();
